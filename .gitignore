@@ -8,7 +8,10 @@
 *.npz
 *.csv
 *.log
-*.png
+## *.png (allow tracking PNG images)
+#*.png
+# *.jpeg (allow tracking JPEG images)
+#*.jpeg
 data/
 work_dir/
 
