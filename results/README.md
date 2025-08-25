@@ -125,22 +125,40 @@ DICOM 文件 = 医学影像的行业标准格式，里面既有图像（像素/�
 
 ### Sanity Check
 
-
-
-便于人工检查：NIfTI是医学图像领域的标准格式，医生或研究者可以用3D Slicer、ITK-SNAP等专业软件直接打开，直观地检查预处理结果是否正确。
+将裁剪后的图像和标签保存为NIfTI（.nii.gz）文件，便于人工或可视化检查。NIfTI是医学图像领域的标准格式，医生或研究者可以用3D Slicer、ITK-SNAP等专业软件直接打开，直观地检查预处理结果是否正确。
 便于可视化：可以快速对比原始图像和标签，发现预处理中的问题（如裁剪、归一化、掩码处理等）。
 便于后续处理：如果后续有其他算法或流程需要用到NIfTI格式的数据，这一步可以直接复用。
 总结：
 保存为NIfTI文件是医学图像处理流程中的常见“中间检查点”，有助于保证数据质量和流程可追溯性。
 
+你可以用3D Slicer或ITK-SNAP同时加载医学图像和标签（分割掩码），进行配准、可视化和检查。方法如下：
 
+1. 3D Slicer
+打开3D Slicer。
+点击左上角“Add Data”或“加载数据”按钮。
+选择你的图像（如xxx_img.nii.gz）和标签（如xxx_gt.nii.gz），可多选。
+勾选“Show Options”，确保标签文件（segmentation/label）被识别为“LabelMap”或“Segmentation”类型。
+点击“OK”导入。
+在左侧“Data”或“层次结构”面板，可以切换显示图像和标签，标签会以彩色叠加在原图上。
+可用“Segmentations”模块调整标签显示方式、透明度等。
+2. ITK-SNAP
+打开ITK-SNAP。
+File → Open Main Image，选择你的图像（如xxx_img.nii.gz）。
+File → Open Segmentation，选择你的标签（如xxx_gt.nii.gz）。
+图像和标签会自动叠加显示，标签区域以彩色高亮。
+可用左侧工具栏切换切片、调整标签透明度、颜色等。
+总结：
+
+两个软件都支持NIfTI格式，图像和标签可同时加载、叠加显示。
+你可以通过切片浏览、三维视图等方式直观检查分割效果和数据质量。
+如需详细操作截图或遇到具体问题，可随时告知！
 
 ## 📌 项目简介
 - 模型基于 [Segment Anything Model (SAM)](https://github.com/facebookresearch/segment-anything)，并针对医学图像进行了适配与微调。  
 - 支持 **单 GPU / 多 GPU** 训练与推理。  
 - 实验任务涵盖 **CT、MRI、病理切片、显微镜图像** 等多种模态。  
 
----
+--- 
 
 ## ⚙️ 环境配置
 ```bash
